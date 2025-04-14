@@ -1,0 +1,26 @@
+from flask import Flask, request, render_template
+app = Flask(__name__)
+
+@app.route('/')
+def home():
+    return render_template('index.html')
+
+@app.route('/cadastrar', methods=['POST'])
+def cadastrar():
+    nome = request.form['nome']
+    cpf = request.form['cpf']
+    bloco = request.form['bloco']
+    apartamento = request.form['apartamento']
+    placa = request.form.get('placa')  # Placa é opcional
+    tipo = request.form['tipo']
+    # Adicione lógica para salvar no banco de dados usando SistemaPortaria
+    return f"{tipo.capitalize()} {nome} cadastrado com sucesso!"
+
+@app.route('/listar', methods=['GET'])
+def listar():
+    tipo = request.args.get('tipo')
+    # Adicione lógica para listar dados do banco de acordo com o tipo
+    return f"Listando cadastros de tipo: {tipo if tipo else 'Todos'}"
+
+if __name__ == '__main__':
+    app.run(debug=True)
