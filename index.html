@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sistema de Portaria</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 20px;
+        }
+        h1 {
+            text-align: center;
+        }
+        form {
+            margin-bottom: 20px;
+        }
+        input, select, button {
+            margin: 10px 0;
+            padding: 10px;
+            width: 100%;
+            max-width: 300px;
+            display: block;
+        }
+        ul {
+            list-style-type: none;
+            padding: 0;
+        }
+        li {
+            margin: 5px 0;
+        }
+    </style>
+</head>
+<body>
+    <h1>Sistema de Portaria</h1>
+    
+    <form action="/cadastrar" method="POST">
+        <h3>Cadastrar Pessoa</h3>
+        <input type="text" name="nome" placeholder="Nome" required>
+        <input type="text" name="cpf" placeholder="CPF" required>
+        <input type="text" name="bloco" placeholder="Bloco" required>
+        <input type="text" name="apartamento" placeholder="Apartamento" required>
+        <select name="tipo" required>
+            <option value="morador">Morador</option>
+            <option value="visitante">Visitante</option>
+            <option value="funcionário">Funcionário</option>
+            <option value="entregador">Entregador</option>
+            <option value="prestador de serviço">Prestador de Serviço</option>
+        </select>
+        <input type="text" name="placa" placeholder="Placa (opcional)">
+        <button type="submit">Cadastrar</button>
+    </form>
+
+    <form action="/listar" method="GET">
+        <h3>Listar Cadastros</h3>
+        <select name="tipo">
+            <option value="">Todos</option>
+            <option value="morador">Moradores</option>
+            <option value="visitante">Visitantes</option>
+            <option value="funcionário">Funcionários</option>
+            <option value="entregador">Entregadores</option>
+            <option value="prestador de serviço">Prestadores de Serviço</option>
+        </select>
+        <button type="submit">Listar</button>
+    </form>
+</body>
+</html>
