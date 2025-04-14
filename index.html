@@ -4,40 +4,45 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Sistema de Portaria</title>
-    <link rel="stylesheet" href="style.css">
- 
+    <link rel="stylesheet" href="style.css"> 
 </head>
 <body>
-    <h1>Sistema de Portaria</h1>
-    
-    <form action="/cadastrar" method="POST">
-        <h3>Cadastrar Pessoa</h3>
-        <input type="text" name="nome" placeholder="Nome" required>
-        <input type="text" name="cpf" placeholder="CPF" required>
-        <input type="text" name="bloco" placeholder="Bloco" required>
-        <input type="text" name="apartamento" placeholder="Apartamento" required>
-        <select name="tipo" required>
-            <option value="morador">Morador</option>
-            <option value="visitante">Visitante</option>
-            <option value="funcionário">Funcionário</option>
-            <option value="entregador">Entregador</option>
-            <option value="prestador de serviço">Prestador de Serviço</option>
-        </select>
-        <input type="text" name="placa" placeholder="Placa (opcional)">
-        <button type="submit">Cadastrar</button>
-    </form>
+    <div class="background">
+        <div class="container">
+            <h1>Sistema de Portaria</h1>
+            
+            <!-- Formulário de cadastro -->
+            <form action="/cadastrar" method="POST">
+                <h3>Cadastrar Pessoa</h3>
+                <input type="text" name="nome" placeholder="Nome" required>
+                <input type="text" name="cpf" placeholder="CPF" required>
+                <input type="text" name="bloco" placeholder="Bloco" required>
+                <input type="text" name="apartamento" placeholder="Apartamento" required>
+                <select name="tipo" required>
+                    <option value="morador">Morador</option>
+                    <option value="visitante">Visitante</option>
+                    <option value="funcionário">Funcionário</option>
+                    <option value="entregador">Entregador</option>
+                    <option value="prestador de serviço">Prestador de Serviço</option>
+                </select>
+                <input type="text" name="placa" placeholder="Placa (opcional)">
+                <button class="button" type="submit">Cadastrar</button>
+            </form>
 
-    <form action="/listar" method="GET">
-        <h3>Listar Cadastros</h3>
-        <select name="tipo">
-            <option value="">Todos</option>
-            <option value="morador">Moradores</option>
-            <option value="visitante">Visitantes</option>
-            <option value="funcionário">Funcionários</option>
-            <option value="entregador">Entregadores</option>
-            <option value="prestador de serviço">Prestadores de Serviço</option>
-        </select>
-        <button type="submit">Listar</button>
-    </form>
+            <!-- Formulário para listar cadastros -->
+            <form action="/listar" method="GET">
+                <h3>Listar Cadastros</h3>
+                <select name="tipo">
+                    <option value="">Todos</option>
+                    <option value="morador">Moradores</option>
+                    <option value="visitante">Visitantes</option>
+                    <option value="funcionário">Funcionários</option>
+                    <option value="entregador">Entregadores</option>
+                    <option value="prestador de serviço">Prestadores de Serviço</option>
+                </select>
+                <button class="button" type="submit">Listar</button>
+            </form>
+        </div>
+    </div>
 </body>
 </html>
