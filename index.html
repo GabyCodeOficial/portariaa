@@ -5,6 +5,50 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Sistema de Portaria</title>
     <link rel="stylesheet" href="style.css"> 
+    <script>
+        // Função para cadastrar pessoa
+        async function cadastrarPessoa(event) {
+            event.preventDefault();
+    
+            const data = {
+                nome: document.querySelector('input[name="nome"]').value,
+                cpf: document.querySelector('input[name="cpf"]').value,
+                bloco: document.querySelector('input[name="bloco"]').value,
+                apartamento: document.querySelector('input[name="apartamento"]').value,
+                tipo: document.querySelector('select[name="tipo"]').value,
+                placa: document.querySelector('input[name="placa"]').value || null
+            };
+    
+            try {
+                const response = await fetch('http://localhost:8080/cadastrar', {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify(data)
+                });
+                const result = await response.json();
+                // Mostra resultado do cadastro
+                mostrarResultado(result.message);
+            } catch (error) {
+                // Mostra mensagem de erro
+                mostrarResultado('Erro ao cadastrar: ' + error.message);
+            }
+        }
+
+        // Função para exibir resultado
+        function mostrarResultado(mensagem) {
+            document.getElementById('formularioCadastro').style.display = 'none';
+            const resultado = document.getElementById('resultadoCadastro');
+            resultado.style.display = 'block';
+            document.getElementById('mensagem').textContent = mensagem;
+        }
+
+        // Inicializa o sistema ao carregar a página
+        window.onload = function() {
+            document.getElementById('resultadoCadastro').style.display = 'none';
+            const form = document.querySelector('form[action="/cadastrar"]');
+            form.addEventListener('submit', cadastrarPessoa);
+        };
+    </script>
 </head>
 <body>
     <div class="background">
@@ -12,37 +56,33 @@
             <h1>Sistema de Portaria</h1>
             
             <!-- Formulário de cadastro -->
-            <form action="/cadastrar" method="POST">
-                <h3>Cadastrar Pessoa</h3>
-                <input type="text" name="nome" placeholder="Nome" required>
-                <input type="text" name="cpf" placeholder="CPF" required>
-                <input type="text" name="bloco" placeholder="Bloco" required>
-                <input type="text" name="apartamento" placeholder="Apartamento" required>
-                <select name="tipo" required>
-                    <option value="morador">Morador</option>
-                    <option value="visitante">Visitante</option>
-                    <option value="funcionário">Funcionário</option>
-                    <option value="entregador">Entregador</option>
-                    <option value="prestador de serviço">Prestador de Serviço</option>
-                </select>
-                <input type="text" name="placa" placeholder="Placa (opcional)">
-                <button class="button" type="submit">Cadastrar</button>
-            </form>
+            <div id="formularioCadastro">
+                <form action="/cadastrar" method="POST">
+                    <h3>Cadastrar Pessoa</h3>
+                    <input type="text" name="nome" placeholder="Nome" required>
+                    <input type="text" name="cpf" placeholder="CPF" required>
+                    <input type="text" name="bloco" placeholder="Bloco" required>
+                    <input type="text" name="apartamento" placeholder="Apartamento" required>
+                    <select name="tipo" required>
+                        <option value="morador">Morador</option>
+                        <option value="visitante">Visitante</option>
+                        <option value="funcionário">Funcionário</option>
+                        <option value="entregador">Entregador</option>
+                        <option value="prestador de serviço">Prestador de Serviço</option>
+                    </select>
+                    <input type="text" name="placa" placeholder="Placa (opcional)">
+                    <button class="button" type="submit">Cadastrar</button>
+                </form>
+            </div>
 
-            <!-- Formulário para listar cadastros -->
-            <form action="/listar" method="GET">
-                <h3>Listar Cadastros</h3>
-                <select name="tipo">
-                    <option value="">Todos</option>
-                    <option value="morador">Moradores</option>
-                    <option value="visitante">Visitantes</option>
-                    <option value="funcionário">Funcionários</option>
-                    <option value="entregador">Entregadores</option>
-                    <option value="prestador de serviço">Prestadores de Serviço</option>
-                </select>
-                <button class="button" type="submit">Listar</button>
-            </form>
+            <!-- Resultado do cadastro -->
+            <div id="resultadoCadastro">
+                <h3>Resultado do Cadastro</h3>
+                <p id="mensagem"></p>
+                <button onclick="location.reload()">Voltar para o início</button>
+            </div>
         </div>
     </div>
 </body>
 </html>
+
